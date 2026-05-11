@@ -1,0 +1,44 @@
+{
+  "manifest_version": 3,
+  "name": "VoidBlock",
+  "version": "0.1.0",
+  "description": "Local ad and tracker eliminator.",
+  "permissions": ["storage", "declarativeNetRequest", "scripting", "tabs"],
+  "host_permissions": ["<all_urls>"],
+  "background": {
+    "service_worker": "dist/background.js",
+    "type": "module"
+  },
+  "action": {
+    "default_popup": "popup/popup.html",
+    "default_title": "VoidBlock"
+  },
+  "content_scripts": [
+    {
+      "matches": ["<all_urls>"],
+      "js": ["dist/content.js"],
+      "run_at": "document_start"
+    },
+    {
+      "matches": ["*://*.youtube.com/*"],
+      "js": ["dist/youtube.js"],
+      "run_at": "document_idle"
+    }
+  ],
+  "declarative_net_request": {
+    "rule_resources": [
+      {
+        "id": "core-rules",
+        "enabled": true,
+        "path": "rules/rules.json"
+      }
+    ]
+  },
+  "icons": {
+    "16": "icons/icon-16.png",
+    "48": "icons/icon-48.png",
+    "128": "icons/icon-128.png"
+  },
+  "privacy_policy_url": "https://github.com/voidblock/voidblock/blob/main/PRIVACY.md",
+  "author": "VoidBlock Contributors"
+}

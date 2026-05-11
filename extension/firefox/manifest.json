@@ -1,0 +1,34 @@
+{
+  "manifest_version": 2,
+  "name": "VoidBlock",
+  "version": "0.1.0",
+  "description": "Local ad and tracker eliminator.",
+  "permissions": ["storage", "webRequest", "webRequestBlocking", "<all_urls>"],
+  "background": {
+    "scripts": ["dist/background.js"],
+    "persistent": true
+  },
+  "browser_action": {
+    "default_popup": "popup/popup.html",
+    "default_title": "VoidBlock"
+  },
+  "content_scripts": [
+    {
+      "matches": ["<all_urls>"],
+      "js": ["dist/content.js"],
+      "run_at": "document_start"
+    },
+    {
+      "matches": ["*://*.youtube.com/*"],
+      "js": ["dist/youtube.js"],
+      "run_at": "document_idle"
+    }
+  ],
+  "icons": {
+    "16": "icons/icon-16.png",
+    "48": "icons/icon-48.png",
+    "128": "icons/icon-128.png"
+  },
+  "author": "VoidBlock Contributors",
+  "homepage_url": "https://github.com/voidblock/voidblock"
+}

@@ -1,0 +1,11 @@
+[package]
+name = "ai-engine"
+version.workspace = true
+edition.workspace = true
+license.workspace = true
+
+[dependencies]
+anyhow = { workspace = true }
+tracing = { workspace = true }
+serde = { workspace = true }
+# ort = { version = "2", features = ["load-dynamic"] }  # ONNX Runtime — uncomment in Phase 4

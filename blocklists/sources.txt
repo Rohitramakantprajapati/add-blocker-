@@ -1,0 +1,4 @@
+Steven Black unified hosts | MIT | https://github.com/StevenBlack/hosts
+EasyList | CC BY-SA 3.0 | https://easylist.to/
+EasyPrivacy | CC BY-SA 3.0 | https://easylist.to/
+AdGuard DNS filter | GPL-3.0 | https://github.com/AdguardTeam/AdguardSDNSFilter

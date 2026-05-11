@@ -1,0 +1,49 @@
+name: Weekly Blocklist Update
+
+on:
+  schedule:
+    # Every Monday at 02:00 UTC
+    - cron: "0 2 * * 1"
+  workflow_dispatch:
+
+jobs:
+  update-blocklist:
+    name: Rebuild and Publish Blocklist
+    runs-on: ubuntu-latest
+    permissions:
+      contents: write
+
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Set up Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+
+      - name: Install dependencies
+        run: pip install -r blocklists/scripts/requirements.txt
+
+      - name: Build blocklist
+        run: python blocklists/scripts/merge.py
+
+      - name: Validate false positive rate
+        run: python blocklists/scripts/validate.py
+
+      - name: Get current date
+        id: date
+        run: echo "date=$(date +'%Y-%m-%d')" >> $GITHUB_OUTPUT
+
+      - name: Create GitHub Release with blocklist asset
+        uses: softprops/action-gh-release@v2
+        with:
+          tag_name: blocklist-${{ steps.date.outputs.date }}
+          name: Blocklist Update ${{ steps.date.outputs.date }}
+          body: |
+            Automated weekly blocklist update.
+            Sources: Steven Black, EasyList, EasyPrivacy, AdGuard DNS filter.
+            Validated: false positive rate <0.1% on Tranco top 1000.
+          files: |
+            blocklists/blocklist.db.lz4
+            blocklists/blocklist.db.lz4.sha256
+          token: ${{ secrets.GITHUB_TOKEN }}
