@@ -1,0 +1,421 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="VoidBlock - 100% local ad blocker with on-device AI. No servers. No tracking. Open source.">
+    <meta name="theme-color" content="#667eea">
+    <meta property="og:title" content="VoidBlock - 100% Local Ad Blocker">
+    <meta property="og:description" content="Privacy-first ad blocker that works entirely on your device. No cloud dependency.">
+    <meta property="og:type" content="website">
+    <meta property="og:url" content="https://rohitramakantprajapati.github.io/add-blocker-/">
+    
+    <title>VoidBlock - 100% Local Ad Blocker</title>
+    
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', sans-serif;
+            line-height: 1.6;
+            color: #333;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            min-height: 100vh;
+        }
+        
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 40px 20px;
+        }
+        
+        header {
+            text-align: center;
+            color: white;
+            margin-bottom: 60px;
+            padding-top: 40px;
+        }
+        
+        h1 {
+            font-size: 3.5em;
+            margin-bottom: 20px;
+            font-weight: 700;
+            letter-spacing: -1px;
+        }
+        
+        .tagline {
+            font-size: 1.3em;
+            opacity: 0.95;
+            margin-bottom: 15px;
+            font-weight: 500;
+        }
+        
+        .subtagline {
+            font-size: 1.1em;
+            opacity: 0.9;
+            margin-bottom: 40px;
+        }
+        
+        .cta-buttons {
+            display: flex;
+            gap: 15px;
+            justify-content: center;
+            flex-wrap: wrap;
+            margin-top: 40px;
+        }
+        
+        .btn {
+            padding: 15px 35px;
+            font-size: 1.1em;
+            border: none;
+            border-radius: 8px;
+            cursor: pointer;
+            text-decoration: none;
+            font-weight: 600;
+            transition: all 0.3s ease;
+            display: inline-block;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.15);
+        }
+        
+        .btn-primary {
+            background: white;
+            color: #667eea;
+        }
+        
+        .btn-primary:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 10px 25px rgba(0,0,0,0.25);
+        }
+        
+        .btn-secondary {
+            background: rgba(255,255,255,0.2);
+            color: white;
+            border: 2px solid white;
+        }
+        
+        .btn-secondary:hover {
+            background: rgba(255,255,255,0.3);
+            transform: translateY(-2px);
+        }
+        
+        .stats {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 20px;
+            margin: 60px 0;
+        }
+        
+        .stat {
+            background: rgba(255,255,255,0.1);
+            backdrop-filter: blur(10px);
+            padding: 30px 20px;
+            border-radius: 12px;
+            color: white;
+            text-align: center;
+            border: 1px solid rgba(255,255,255,0.2);
+            transition: all 0.3s;
+        }
+        
+        .stat:hover {
+            background: rgba(255,255,255,0.15);
+            transform: translateY(-5px);
+        }
+        
+        .stat-value {
+            font-size: 2.2em;
+            font-weight: 700;
+            margin-bottom: 8px;
+        }
+        
+        .stat-label {
+            font-size: 0.95em;
+            opacity: 0.9;
+        }
+        
+        .features {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 30px;
+            margin-top: 80px;
+        }
+        
+        .feature {
+            background: white;
+            padding: 40px 30px;
+            border-radius: 12px;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.1);
+            transition: all 0.3s;
+        }
+        
+        .feature:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 15px 40px rgba(0,0,0,0.15);
+        }
+        
+        .feature-icon {
+            font-size: 2.5em;
+            margin-bottom: 15px;
+        }
+        
+        .feature h3 {
+            color: #667eea;
+            margin-bottom: 15px;
+            font-size: 1.4em;
+        }
+        
+        .feature p {
+            color: #666;
+            line-height: 1.8;
+        }
+        
+        .platforms {
+            margin-top: 80px;
+            background: rgba(255,255,255,0.95);
+            padding: 50px 40px;
+            border-radius: 12px;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.1);
+        }
+        
+        .platforms h2 {
+            text-align: center;
+            color: #667eea;
+            margin-bottom: 40px;
+            font-size: 2em;
+        }
+        
+        .platform-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+            gap: 20px;
+        }
+        
+        .platform {
+            text-align: center;
+            padding: 20px;
+            border-radius: 8px;
+            background: #f8f9ff;
+            border: 2px solid #667eea;
+            color: #667eea;
+            font-weight: 600;
+            transition: all 0.3s;
+        }
+        
+        .platform:hover {
+            background: #667eea;
+            color: white;
+        }
+        
+        .platform.coming {
+            opacity: 0.6;
+            border-color: #ccc;
+            color: #999;
+        }
+        
+        .platform.coming:hover {
+            background: #f8f9ff;
+            color: #999;
+        }
+        
+        footer {
+            text-align: center;
+            margin-top: 80px;
+            padding-top: 40px;
+            border-top: 1px solid rgba(255,255,255,0.2);
+            color: rgba(255,255,255,0.8);
+        }
+        
+        footer a {
+            color: white;
+            text-decoration: none;
+            font-weight: 600;
+            transition: all 0.3s;
+        }
+        
+        footer a:hover {
+            opacity: 0.8;
+            text-decoration: underline;
+        }
+        
+        .footer-links {
+            display: flex;
+            gap: 20px;
+            justify-content: center;
+            flex-wrap: wrap;
+            margin-bottom: 20px;
+        }
+        
+        .footer-links a {
+            color: white;
+        }
+        
+        .github-stars {
+            font-size: 1.2em;
+            margin-bottom: 20px;
+        }
+        
+        .timeline {
+            margin-top: 60px;
+            background: rgba(255,255,255,0.95);
+            padding: 40px;
+            border-radius: 12px;
+            color: #333;
+        }
+        
+        .timeline h2 {
+            text-align: center;
+            color: #667eea;
+            margin-bottom: 30px;
+            font-size: 1.8em;
+        }
+        
+        .timeline-item {
+            display: flex;
+            margin-bottom: 20px;
+            padding: 15px;
+            border-left: 4px solid #667eea;
+            background: #f8f9ff;
+            border-radius: 4px;
+        }
+        
+        .timeline-date {
+            color: #667eea;
+            font-weight: 700;
+            min-width: 100px;
+        }
+        
+        @media (max-width: 768px) {
+            h1 {
+                font-size: 2.5em;
+            }
+            
+            .tagline {
+                font-size: 1.1em;
+            }
+            
+            .cta-buttons {
+                flex-direction: column;
+            }
+            
+            .btn {
+                width: 100%;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <header>
+            <h1>🛡️ VoidBlock</h1>
+            <p class="tagline">100% Local Ad Blocker with Zero Server Dependency</p>
+            <p class="subtagline">No tracking. No cloud. No compromise. Just pure privacy.</p>
+            
+            <div class="cta-buttons">
+                <a href="https://github.com/Rohitramakantprajapati/add-blocker-" class="btn btn-primary">⭐ Star on GitHub</a>
+                <a href="#features" class="btn btn-secondary">Learn More</a>
+            </div>
+        </header>
+
+        <div class="stats">
+            <div class="stat">
+                <div class="stat-value">&lt;0.5ms</div>
+                <div class="stat-label">DNS Latency</div>
+            </div>
+            <div class="stat">
+                <div class="stat-value">&lt;15MB</div>
+                <div class="stat-label">Memory Usage</div>
+            </div>
+            <div class="stat">
+                <div class="stat-value">&lt;1%/hr</div>
+                <div class="stat-label">Battery Drain</div>
+            </div>
+            <div class="stat">
+                <div class="stat-value">100%</div>
+                <div class="stat-label">Local Processing</div>
+            </div>
+        </div>
+
+        <div id="features" class="features">
+            <div class="feature">
+                <div class="feature-icon">⚡</div>
+                <h3>Ultra-Fast</h3>
+                <p>Less than 0.5ms DNS block decision. AI-powered pattern detection with sub-millisecond inference.</p>
+            </div>
+            <div class="feature">
+                <div class="feature-icon">🔒</div>
+                <h3>Truly Private</h3>
+                <p>100% local processing. No cloud servers. No tracking. No analytics. Your data never leaves your device.</p>
+            </div>
+            <div class="feature">
+                <div class="feature-icon">🤖</div>
+                <h3>AI-Powered</h3>
+                <p>On-device ONNX model adapts to new ad patterns without waiting for blocklist updates.</p>
+            </div>
+            <div class="feature">
+                <div class="feature-icon">📱</div>
+                <h3>Cross-Platform</h3>
+                <p>Android, iOS, Windows, macOS, Linux, and OpenWRT router support in one unified codebase.</p>
+            </div>
+            <div class="feature">
+                <div class="feature-icon">🔓</div>
+                <h3>Open Source</h3>
+                <p>MIT license. Fully auditable. Community-driven development. No proprietary code.</p>
+            </div>
+            <div class="feature">
+                <div class="feature-icon">💾</div>
+                <h3>Lightweight</h3>
+                <p>Android APK under 20MB. Uses less than 15MB RAM. Works on budget phones and flagship devices.</p>
+            </div>
+        </div>
+
+        <div class="platforms">
+            <h2>📲 Available On</h2>
+            <div class="platform-grid">
+                <div class="platform">🤖 Android (Live)</div>
+                <div class="platform coming">🍎 iOS (Q4 2026)</div>
+                <div class="platform coming">🖥️ Windows (Q4 2026)</div>
+                <div class="platform coming">🍎 macOS (Q4 2026)</div>
+                <div class="platform coming">🐧 Linux (Q4 2026)</div>
+                <div class="platform coming">🔌 Router (Q1 2027)</div>
+            </div>
+        </div>
+
+        <div class="timeline">
+            <h2>📅 Development Roadmap</h2>
+            <div class="timeline-item">
+                <div class="timeline-date">Phase 1</div>
+                <div><strong>Android MVP (Q3 2026)</strong> - Local DNS blocking, AI engine, battery-optimized</div>
+            </div>
+            <div class="timeline-item">
+                <div class="timeline-date">Phase 2</div>
+                <div><strong>Browser Extensions (Q4 2026)</strong> - Chrome MV3, Firefox MV2, YouTube ad skipping</div>
+            </div>
+            <div class="timeline-item">
+                <div class="timeline-date">Phase 3</div>
+                <div><strong>Windows/macOS (Q4 2026)</strong> - System-wide blocking, DNS override, menu bar UI</div>
+            </div>
+            <div class="timeline-item">
+                <div class="timeline-date">Phase 4+</div>
+                <div><strong>iOS, Linux, P2P, Router (2027)</strong> - Full platform coverage with P2P sync</div>
+            </div>
+        </div>
+
+        <footer>
+            <div class="footer-links">
+                <a href="https://github.com/Rohitramakantprajapati/add-blocker-">GitHub</a>
+                <a href="https://github.com/Rohitramakantprajapati/add-blocker-/discussions">Discussions</a>
+                <a href="https://github.com/Rohitramakantprajapati/add-blocker-/issues">Issues</a>
+                <a href="https://github.com/Rohitramakantprajapati/add-blocker-/blob/main/PRIVACY.md">Privacy</a>
+            </div>
+            <div class="github-stars">
+                <a href="https://github.com/Rohitramakantprajapati/add-blocker-">⭐ Star us on GitHub</a>
+            </div>
+            <p style="margin-top: 20px; font-size: 0.9em;">MIT License © 2026 VoidBlock Contributors</p>
+            <p style="margin-top: 10px; font-size: 0.85em;">Made with 💜 for privacy</p>
+        </footer>
+    </div>
+</body>
+</html>
