@@ -1,0 +1,57 @@
+// !$*UTF8*$!
+{
+	archiveVersion = 1;
+	classes = {};
+	objectVersion = 56;
+	objects = {
+
+/* Begin PBXFileReference section */
+		A1B2C3D41A1B2C3D00000001 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Sources/AppDelegate.swift; sourceTree = "<group>"; };
+		A1B2C3D41A1B2C3D00000002 /* AppProxyProvider.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Sources/AppProxyProvider.swift; sourceTree = "<group>"; };
+		A1B2C3D41A1B2C3D00000003 /* FilterProvider.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Sources/FilterProvider.swift; sourceTree = "<group>"; };
+		A1B2C3D41A1B2C3D00000004 /* DNSFallback.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Sources/DNSFallback.swift; sourceTree = "<group>"; };
+		A1B2C3D41A1B2C3D00000005 /* VoidBlock.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = VoidBlock.entitlements; sourceTree = "<group>"; };
+		A1B2C3D41A1B2C3D00000006 /* VoidBlock.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; path = VoidBlock.app; sourceTree = BUILT_PRODUCTS_DIR; };
+/* End PBXFileReference section */
+
+/* Begin PBXGroup section */
+		A1B2C3D41A1B2C3D00000010 = {isa = PBXGroup; children = (A1B2C3D41A1B2C3D00000020, A1B2C3D41A1B2C3D00000030); sourceTree = "<group>"; };
+		A1B2C3D41A1B2C3D00000020 = {isa = PBXGroup; children = (A1B2C3D41A1B2C3D00000001, A1B2C3D41A1B2C3D00000002, A1B2C3D41A1B2C3D00000003, A1B2C3D41A1B2C3D00000004, A1B2C3D41A1B2C3D00000005); path = Sources; sourceTree = "<group>"; };
+		A1B2C3D41A1B2C3D00000030 = {isa = PBXGroup; children = (A1B2C3D41A1B2C3D00000006); name = Products; sourceTree = "<group>"; };
+/* End PBXGroup section */
+
+/* Begin PBXNativeTarget section */
+		A1B2C3D41A1B2C3D00000040 = {isa = PBXNativeTarget; buildConfigurationList = A1B2C3D41A1B2C3D00000060; buildPhases = (A1B2C3D41A1B2C3D00000070, A1B2C3D41A1B2C3D00000071); buildRules = (); dependencies = (); name = VoidBlock; productName = VoidBlock; productReference = A1B2C3D41A1B2C3D00000006; productType = "com.apple.product-type.application"; };
+/* End PBXNativeTarget section */
+
+/* Begin PBXProject section */
+		A1B2C3D41A1B2C3D00000050 = {isa = PBXProject; buildConfigurationList = A1B2C3D41A1B2C3D00000061; compatibilityVersion = "Xcode 14.0"; developmentRegion = en; hasScannedForEncodings = 0; mainGroup = A1B2C3D41A1B2C3D00000010; productRefGroup = A1B2C3D41A1B2C3D00000030; targets = (A1B2C3D41A1B2C3D00000040); };
+/* End PBXProject section */
+
+/* Begin PBXBuildFile section */
+		A1B2C3D41A1B2C3D00000080 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = A1B2C3D41A1B2C3D00000001; };
+		A1B2C3D41A1B2C3D00000081 /* AppProxyProvider.swift in Sources */ = {isa = PBXBuildFile; fileRef = A1B2C3D41A1B2C3D00000002; };
+		A1B2C3D41A1B2C3D00000082 /* FilterProvider.swift in Sources */ = {isa = PBXBuildFile; fileRef = A1B2C3D41A1B2C3D00000003; };
+		A1B2C3D41A1B2C3D00000083 /* DNSFallback.swift in Sources */ = {isa = PBXBuildFile; fileRef = A1B2C3D41A1B2C3D00000004; };
+/* End PBXBuildFile section */
+
+/* Begin PBXSourcesBuildPhase section */
+		A1B2C3D41A1B2C3D00000070 = {isa = PBXSourcesBuildPhase; buildActionMask = 2147483647; files = (A1B2C3D41A1B2C3D00000080, A1B2C3D41A1B2C3D00000081, A1B2C3D41A1B2C3D00000082, A1B2C3D41A1B2C3D00000083); runOnlyForDeploymentPostprocessing = 0; };
+		A1B2C3D41A1B2C3D00000071 = {isa = PBXResourcesBuildPhase; buildActionMask = 2147483647; files = (); runOnlyForDeploymentPostprocessing = 0; };
+/* End PBXSourcesBuildPhase section */
+
+/* Begin XCBuildConfiguration section */
+		A1B2C3D41A1B2C3D00000090 = {isa = XCBuildConfiguration; buildSettings = {ALWAYS_SEARCH_USER_PATHS = NO; CLANG_ENABLE_MODULES = YES; CODE_SIGN_ENTITLEMENTS = VoidBlock.entitlements; INFOPLIST_FILE = Info.plist; IPHONEOS_DEPLOYMENT_TARGET = 14.0; MACOSX_DEPLOYMENT_TARGET = 13.0; PRODUCT_BUNDLE_IDENTIFIER = com.voidblock.desktop; PRODUCT_NAME = VoidBlock; SWIFT_VERSION = 5.9; }; name = Debug; };
+		A1B2C3D41A1B2C3D00000091 = {isa = XCBuildConfiguration; buildSettings = {ALWAYS_SEARCH_USER_PATHS = NO; CLANG_ENABLE_MODULES = YES; CODE_SIGN_ENTITLEMENTS = VoidBlock.entitlements; INFOPLIST_FILE = Info.plist; IPHONEOS_DEPLOYMENT_TARGET = 14.0; MACOSX_DEPLOYMENT_TARGET = 13.0; PRODUCT_BUNDLE_IDENTIFIER = com.voidblock.desktop; PRODUCT_NAME = VoidBlock; SWIFT_VERSION = 5.9; }; name = Release; };
+		A1B2C3D41A1B2C3D00000092 = {isa = XCBuildConfiguration; buildSettings = {PRODUCT_NAME = VoidBlock;}; name = Debug; };
+		A1B2C3D41A1B2C3D00000093 = {isa = XCBuildConfiguration; buildSettings = {PRODUCT_NAME = VoidBlock;}; name = Release; };
+/* End XCBuildConfiguration section */
+
+/* Begin XCConfigurationList section */
+		A1B2C3D41A1B2C3D00000060 = {isa = XCConfigurationList; buildConfigurations = (A1B2C3D41A1B2C3D00000090, A1B2C3D41A1B2C3D00000091); defaultConfigurationIsVisible = 0; defaultConfigurationName = Release; };
+		A1B2C3D41A1B2C3D00000061 = {isa = XCConfigurationList; buildConfigurations = (A1B2C3D41A1B2C3D00000092, A1B2C3D41A1B2C3D00000093); defaultConfigurationIsVisible = 0; defaultConfigurationName = Release; };
+/* End XCConfigurationList section */
+
+	};
+	rootObject = A1B2C3D41A1B2C3D00000050;
+}

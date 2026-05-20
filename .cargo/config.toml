@@ -3,3 +3,23 @@ target-dir = "target"
 
 [future-incompat-report]
 frequency = "never"
+
+# Common cross-compile target linker/toolchain hints. These are suggestions
+# for developers' systems and CI. They do not force installation of toolchains.
+[target.aarch64-linux-android]
+linker = "aarch64-linux-android-clang"
+
+[target.x86_64-pc-windows-gnu]
+linker = "x86_64-w64-mingw32-gcc"
+
+[target.aarch64-apple-ios]
+linker = "clang"
+
+[target.aarch64-unknown-linux-gnu]
+linker = "aarch64-linux-gnu-gcc"
+
+[target.x86_64-unknown-linux-gnu]
+linker = "gcc"
+
+[target.armv7-unknown-linux-gnueabihf]
+linker = "arm-linux-gnueabihf-gcc"

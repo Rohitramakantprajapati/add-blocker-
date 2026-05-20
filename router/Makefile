@@ -1,3 +1,17 @@
+PKG_NAME := voidblock
+PKG_VERSION := 0.1.0
+
+all:
+	@echo "VoidBlock OpenWRT packaging stub"
+
+package:
+	@mkdir -p build
+	@tar -czf build/$(PKG_NAME)-$(PKG_VERSION).tar.gz files luci-app-voidblock
+
+clean:
+	@rm -rf build
+
+.PHONY: all package clean
 PKGNAME := voidblock
 VERSION := 0.1
 DEST := build/$(PKGNAME)-$(VERSION)

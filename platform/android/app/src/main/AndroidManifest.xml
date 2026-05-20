@@ -1,23 +1,12 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     package="com.voidblock">
 
-    <!-- VPN Service Requirements -->
     <uses-permission android:name="android.permission.BIND_VPN_SERVICE" />
     <uses-permission android:name="android.permission.CHANGE_NETWORK_STATE" />
     <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
-
-    <!-- Network Access -->
     <uses-permission android:name="android.permission.INTERNET" />
     <uses-permission android:name="android.permission.FOREGROUND_SERVICE" />
-    <uses-permission android:name="android.permission.FOREGROUND_SERVICE_SYSTEM_EXEMPTED" />
     <uses-permission android:name="android.permission.POST_NOTIFICATIONS" />
-
-    <!-- Storage (for blocklist persistence) -->
-    <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE" />
-    <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
-
-    <!-- Battery & Device State (for optimization) -->
-    <uses-permission android:name="android.permission.ACCESS_WIFI_STATE" />
 
     <application
         android:allowBackup="false"
@@ -34,10 +23,9 @@
         </activity>
 
         <service
-            android:name=".VpnServiceImpl"
+            android:name=".VoidBlockVpnService"
             android:permission="android.permission.BIND_VPN_SERVICE"
-            android:exported="false"
-            android:foregroundServiceType="systemExempted">
+            android:exported="false">
             <intent-filter>
                 <action android:name="android.net.VpnService" />
             </intent-filter>

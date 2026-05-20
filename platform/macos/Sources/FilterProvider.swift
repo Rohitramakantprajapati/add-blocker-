@@ -12,9 +12,4 @@ final class FilterProvider: NEFilterDataProvider {
         }
         return .allow()
     }
-
-    override func handleRulesChanged() {
-        os_log("VoidBlock filter rules changed")
-        completionHandler(.allow())
-    }
 }

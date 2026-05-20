@@ -14,9 +14,11 @@ final class AppDelegate: NSObject, NSApplicationDelegate {
 
     private func buildMenu() -> NSMenu {
         let menu = NSMenu()
-        menu.addItem(withTitle: "Open VoidBlock", action: #selector(openApp), keyEquivalent: "o")
+        let openItem = menu.addItem(withTitle: "Open VoidBlock", action: #selector(openApp), keyEquivalent: "o")
+        openItem.target = self
         menu.addItem(NSMenuItem.separator())
-        menu.addItem(withTitle: "Quit", action: #selector(terminateApp), keyEquivalent: "q")
+        let quitItem = menu.addItem(withTitle: "Quit", action: #selector(terminateApp), keyEquivalent: "q")
+        quitItem.target = self
         return menu
     }
 

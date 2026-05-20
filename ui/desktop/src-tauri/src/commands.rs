@@ -8,6 +8,7 @@ pub enum VoidBlockError {
 }
 
 #[derive(Debug, Clone, Serialize, Deserialize)]
+#[serde(rename_all = "camelCase")]
 pub struct StatsSnapshot {
     pub blocked: u64,
     pub latency_ms: u64,

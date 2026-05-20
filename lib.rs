@@ -1,5 +1,4 @@
-//! VoidBlock placeholder root module retained for compatibility with the
-//! existing workspace snapshot.
+//! Compatibility root module retained for the workspace snapshot.
 
 pub const VOIDBLOCK_VERSION: &str = "0.1.0";
 

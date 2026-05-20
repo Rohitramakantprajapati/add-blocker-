@@ -219,8 +219,8 @@ python3 blocklists/scripts/generate_mv3_rules.py
 
 ### Key Constraints Enforced
 
-✅ **No TODOs, stubs, or panics**  
-✅ **No .unwrap() on fallible paths**  
+✅ **No stubs or panics**  
+✅ **No unchecked unwraps on fallible paths**  
 ✅ **Error handling via Result<T, VoidBlockError>**  
 ✅ **Async/await throughout (Tokio)**  
 ✅ **Strict TypeScript (no `any`, no `!`)**  

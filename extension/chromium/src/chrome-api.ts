@@ -5,9 +5,11 @@ export interface StorageArea {
 
 export interface RuntimeMessageSender {
   tab?: { id?: number };
+  url?: string;
 }
 
 export interface RuntimeApi {
+  getURL(path: string): string;
   onInstalled: {
     addListener(listener: (details: { reason: string }) => void): void;
   };

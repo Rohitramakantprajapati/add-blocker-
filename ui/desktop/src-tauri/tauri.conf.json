@@ -1,0 +1,31 @@
+{
+  "$schema": "https://schema.tauri.app/config/2",
+  "productName": "VoidBlock",
+  "version": "0.1.0",
+  "identifier": "com.voidblock.desktop",
+  "build": {
+    "beforeBuildCommand": "npm run build --prefix ..",
+    "beforeDevCommand": "npm run dev --prefix ..",
+    "devUrl": "../dist",
+    "frontendDist": "../dist"
+  },
+  "app": {
+    "security": {
+      "csp": null
+    },
+    "windows": [
+      {
+        "label": "main",
+        "title": "VoidBlock",
+        "width": 1280,
+        "height": 860,
+        "resizable": true,
+        "fullscreen": false,
+        "visible": false
+      }
+    ]
+  },
+  "bundle": {
+    "active": false
+  }
+}

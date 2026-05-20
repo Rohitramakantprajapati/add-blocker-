@@ -17,7 +17,9 @@ impl UrlMatcher {
         if patterns.is_empty() {
             return Err(VoidBlockError::Pattern("at least one pattern is required".to_string()));
         }
-        let automaton = AhoCorasick::new(&patterns).map_err(|error| VoidBlockError::Pattern(error.to_string()))?;
+        let pat_refs: Vec<&str> = patterns.iter().map(|s| s.as_str()).collect();
+        let automaton = AhoCorasick::new(&pat_refs)
+            .map_err(|error| VoidBlockError::Pattern(error.to_string()))?;
         Ok(Self { automaton, patterns })
     }
 

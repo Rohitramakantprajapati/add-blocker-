@@ -14,11 +14,11 @@ impl FeatureVector {
         let url_entropy = shannon_entropy(url);
         let domain_age_proxy = domain_age_proxy(url);
         Self {
-            url_entropy,
+            url_entropy: (url_entropy / 8.0).clamp(0.0, 1.0),
             domain_age_proxy,
-            cname_depth: cname_depth as f32,
-            response_size: response_size as f32,
-            timing_ms,
+            cname_depth: (cname_depth as f32 / 6.0).clamp(0.0, 1.0),
+            response_size: ((response_size as f32) / 10_000.0).clamp(0.0, 1.0),
+            timing_ms: (timing_ms / 30.0).clamp(0.0, 1.0),
         }
     }
 
@@ -50,6 +50,13 @@ fn shannon_entropy(value: &str) -> f32 {
 }
 
 fn domain_age_proxy(url: &str) -> f32 {
-    let segments = url.split('.').count() as f32;
+    let host = url
+        .split_once("//")
+        .map(|(_, rest)| rest)
+        .unwrap_or(url)
+        .split(&['/', '?', '#'][..])
+        .next()
+        .unwrap_or(url);
+    let segments = host.split('.').filter(|segment| !segment.is_empty()).count() as f32;
     1.0 / segments.max(1.0)
 }

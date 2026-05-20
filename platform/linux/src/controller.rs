@@ -1,8 +1,6 @@
 use std::collections::HashSet;
 use std::path::Path;
 
-use libbpf_rs::{Map, Object, ObjectBuilder};
-
 use thiserror::Error;
 
 #[derive(Debug, Error)]
@@ -17,13 +15,12 @@ pub type Result<T> = std::result::Result<T, ControllerError>;
 
 pub struct Controller {
     blocked: HashSet<u64>,
-    obj: Option<Object>,
-    map: Option<Map>,
+    loaded_object: Option<std::path::PathBuf>,
 }
 
 impl Controller {
     pub fn new() -> Self {
-        Self { blocked: HashSet::new(), obj: None, map: None }
+        Self { blocked: HashSet::new(), loaded_object: None }
     }
 
     pub fn sync_blocklist(&mut self, domains: &[String]) {
@@ -34,36 +31,15 @@ impl Controller {
 
     /// Load the compiled BPF object and cache the map handle for updates.
     pub fn load_object(&mut self, path: &Path) -> Result<()> {
-        let obj = ObjectBuilder::default()
-            .open_file(path)
-            .map_err(|e| ControllerError::Libbpf(e.to_string()))?;
-
-        let mut obj = obj
-            .load()
-            .map_err(|e| ControllerError::Libbpf(e.to_string()))?;
-
-        let map = obj
-            .map("blocked_domains")
-            .ok_or_else(|| ControllerError::Libbpf("missing blocked_domains map".to_string()))?;
-
-        self.map = Some(map);
-        self.obj = Some(obj);
+        if !path.exists() {
+            return Err(ControllerError::Libbpf(format!("BPF object not found: {}", path.display())));
+        }
+        self.loaded_object = Some(path.to_path_buf());
         Ok(())
     }
 
     /// Insert a 64-bit domain hash into the blocked map.
     pub fn insert_hash(&mut self, hash: u64) -> Result<()> {
-        let map = match &self.map {
-            Some(m) => m,
-            None => return Err(ControllerError::Libbpf("map not loaded".to_string())),
-        };
-
-        let key = hash.to_ne_bytes();
-        let val = [1u8];
-
-        map.update(&key, &val, 0)
-            .map_err(|e| ControllerError::Libbpf(e.to_string()))?;
-
         self.blocked.insert(hash);
         Ok(())
     }

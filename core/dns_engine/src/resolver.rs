@@ -65,7 +65,7 @@ pub fn build_nxdomain_response(packet: &[u8]) -> Result<Vec<u8>> {
 
 pub async fn run(config: EngineConfig) -> Result<()> {
     let engine = Arc::new(VoidBlockEngine::open(&config)?);
-    let udp = bind_udp(config.bind_addr)?;
+    let udp = Arc::new(bind_udp(config.bind_addr)?);
     let tcp = bind_tcp(config.bind_addr)?;
 
     info!(address = %config.bind_addr, "VoidBlock DNS resolver started");
@@ -106,21 +106,26 @@ fn bind_tcp(addr: SocketAddr) -> Result<TcpListener> {
     Ok(TcpListener::from_std(socket.into())?)
 }
 
-fn spawn_udp_loop(socket: UdpSocket, engine: Arc<VoidBlockEngine>) -> JoinHandle<Result<()>> {
+fn spawn_udp_loop(socket: Arc<UdpSocket>, engine: Arc<VoidBlockEngine>) -> JoinHandle<Result<()>> {
     tokio::spawn(async move {
         let mut buffer = vec![0u8; 2048];
         loop {
             let (size, peer) = socket.recv_from(&mut buffer).await?;
             let request = buffer[..size].to_vec();
-            let engine = engine.clone();
-            let response = tokio::spawn(async move { engine.handle_query(&request).await }).await;
-            let response = match response {
-                Ok(result) => result?,
-                Err(join_error) => {
-                    return Err(VoidBlockError::Resolver(format!("UDP worker join error: {join_error}")));
+            let socket = Arc::clone(&socket);
+            let engine = Arc::clone(&engine);
+            let _ = tokio::spawn(async move {
+                match engine.handle_query(&request).await {
+                    Ok(response) => {
+                        if let Err(error) = socket.send_to(&response, peer).await {
+                            error!(%error, %peer, "failed to send DNS response");
+                        }
+                    }
+                    Err(error) => {
+                        warn!(%error, %peer, "failed to handle DNS query");
+                    }
                 }
-            };
-            socket.send_to(&response, peer).await?;
+            });
         }
     })
 }
@@ -131,7 +136,7 @@ fn spawn_tcp_loop(listener: TcpListener, engine: Arc<VoidBlockEngine>) -> JoinHa
             let (stream, peer) = listener.accept().await?;
             debug!(%peer, "accepted DNS-over-TCP connection");
             let engine = engine.clone();
-            tokio::spawn(async move {
+            let _ = tokio::spawn(async move {
                 if let Err(error) = handle_tcp_connection(stream, engine).await {
                     warn!(%error, %peer, "TCP connection failed");
                 }

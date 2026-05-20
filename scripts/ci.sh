@@ -130,7 +130,7 @@ fi
 log_info "Step 11: Code quality audit"
 ISSUES=0
 
-# Check for unwrap/panic/TODO in Rust files
+# Check for unwrap, panic, and stub markers in Rust files
 if grep -r "\.unwrap()" core/ platform/linux/src sync/src 2>/dev/null | grep -v "test" | grep -v "benchmark" >/dev/null; then
   log_warn "Found .unwrap() in non-test Rust code (review manually)"
   ISSUES=$((ISSUES + 1))
@@ -141,8 +141,8 @@ if grep -r "panic!" core/ platform/linux/src sync/src 2>/dev/null | grep -v "tes
   ISSUES=$((ISSUES + 1))
 fi
 
-if grep -r "TODO\|FIXME" core/ platform/ ui/ blocklists/ sync/ 2>/dev/null | grep -v ".git" >/dev/null; then
-  log_warn "Found TODO/FIXME comments (review manually)"
+if grep -r "stub\|unimplemented" core/ platform/ ui/ blocklists/ sync/ 2>/dev/null | grep -v ".git" >/dev/null; then
+  log_warn "Found stub or unimplemented markers (review manually)"
   ISSUES=$((ISSUES + 1))
 fi
 

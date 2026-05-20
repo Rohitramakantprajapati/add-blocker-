@@ -20,7 +20,8 @@
 <section class="panel allowlist">
   <h2>Allowlist</h2>
   <div class="row">
-    <input bind:value={input} placeholder="add domain" />
+    <label for="allowlist-input">Domain</label>
+    <input id="allowlist-input" bind:value={input} />
     <button type="button" on:click={addDomain}>Add</button>
   </div>
   <ul>

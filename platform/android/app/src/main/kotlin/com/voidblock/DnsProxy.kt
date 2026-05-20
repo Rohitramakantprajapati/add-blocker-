@@ -1,13 +1,22 @@
 package com.voidblock
 
-class DnsProxy {
-    external fun nativeResolve(query: ByteArray): ByteArray
+import android.util.Log
 
-    fun resolveSafely(query: ByteArray): ByteArray {
+object DnsProxy {
+    external fun routeDns(packet: ByteArray): Int
+
+    fun safeRoute(packet: ByteArray): Boolean {
         return try {
-            nativeResolve(query)
+            try {
+                System.loadLibrary("voidblock_jni")
+            } catch (throwable: Throwable) {
+                Log.e("DnsProxy", "JNI library load failed", throwable)
+                return false
+            }
+            routeDns(packet) == 0
         } catch (throwable: Throwable) {
-            query
+            Log.e("DnsProxy", "JNI routeDns failed", throwable)
+            false
         }
     }
 }

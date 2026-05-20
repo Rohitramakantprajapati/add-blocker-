@@ -26,8 +26,8 @@
   async function checkTauriAvailable(): Promise<boolean> {
     try {
       const { invoke } = await import("@tauri-apps/api/core");
-      const result = await invoke("ping");
-      return result !== undefined;
+      await invoke("get_stats");
+      return true;
     } catch {
       return false;
     }
@@ -81,24 +81,30 @@
     }
   }
 
-  onMount(async () => {
-    // Check if running in Tauri context
-    isInTauriContext = await checkTauriAvailable();
-    
-    // Initial refresh
-    await refreshStats();
-    
-    // Set up auto-refresh interval
-    if (enabled && !autoRefreshInterval) {
-      autoRefreshInterval = window.setInterval(() => {
-        void refreshStats();
-      }, 1500);
-    }
+  onMount(() => {
+    let disposed = false;
 
-    // Cleanup on unmount
+    void (async () => {
+      isInTauriContext = await checkTauriAvailable();
+
+      if (disposed) {
+        return;
+      }
+
+      await refreshStats();
+
+      if (enabled && autoRefreshInterval === null) {
+        autoRefreshInterval = window.setInterval(() => {
+          void refreshStats();
+        }, 1500);
+      }
+    })();
+
     return () => {
-      if (autoRefreshInterval) {
+      disposed = true;
+      if (autoRefreshInterval !== null) {
         clearInterval(autoRefreshInterval);
+        autoRefreshInterval = null;
       }
     };
   });

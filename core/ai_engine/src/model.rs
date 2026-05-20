@@ -15,8 +15,8 @@ pub struct Model {
 impl Default for Model {
     fn default() -> Self {
         Self {
-            weights: [0.45, 0.30, 0.15, -0.20, 0.10],
-            bias: -0.95,
+            weights: [1.10, 0.60, 0.90, 3.00, 1.20],
+            bias: -1.20,
             threshold: 0.92,
         }
     }

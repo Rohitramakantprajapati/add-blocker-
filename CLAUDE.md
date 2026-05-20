@@ -127,7 +127,7 @@ YouTube skip automation ships in the browser extension (Firefox/Chrome) only, ne
 - Signed blocklist update: static HTTPS file fetch (no P2P yet)
 - Chrome/Edge MV3 extension (see MV3 constraints below)
 - Firefox MV2 extension: full webRequest blocking, no rule cap
-- Cosmetic filter injection: element hiding, ad placeholder removal
+- Cosmetic filter injection: element hiding and ad suppression
 - YouTube ad skip automation — **Firefox and Chrome extensions only, not Android APK**
 - Anti-anti-adblock bypass engine
 

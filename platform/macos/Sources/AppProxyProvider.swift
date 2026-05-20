@@ -13,11 +13,7 @@ final class AppProxyProvider: NEAppProxyProvider {
     }
 
     override func handleNewFlow(_ flow: NEAppProxyFlow) -> Bool {
-        completionHandler(.closeReadWrite())
+        os_log("VoidBlock app proxy received flow: %{public}@", String(describing: flow))
         return true
-    }
-
-    private func completionHandler(_ verdict: NEAppProxyFlowVerdict) {
-        os_log("VoidBlock verdict: %{public}@", String(describing: verdict))
     }
 }

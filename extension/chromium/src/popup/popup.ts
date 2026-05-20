@@ -1,3 +1,21 @@
+async function loadStats(): Promise<void> {
+  try {
+    const response = await chrome.runtime.sendMessage({ type: "get-stats" });
+    const blocked = Number(response.blocked ?? 0);
+    const latencyMs = Number(response.latencyMs ?? 0);
+    const root = document.querySelector("main");
+    if (root) {
+      root.insertAdjacentHTML(
+        "beforeend",
+        `<p>Blocked: ${blocked}</p><p>Latency: ${latencyMs} ms</p>`,
+      );
+    }
+  } catch (error) {
+    console.error("VoidBlock popup stats failed", error);
+  }
+}
+
+void loadStats();
 import { chrome } from "../chrome-api.js";
 
 type Stats = {

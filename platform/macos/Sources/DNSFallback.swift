@@ -4,7 +4,7 @@ import os.log
 struct DNSFallback {
     func setSystemDoH(enabled: Bool) async throws {
         let task = Process()
-        task.launchPath = "/usr/sbin/networksetup"
+        task.executableURL = URL(fileURLWithPath: "/usr/sbin/networksetup")
         task.arguments = enabled ? ["-setdnsservers", "Wi-Fi", "1.1.1.1", "9.9.9.9"] : ["-setdnsservers", "Wi-Fi", "Empty"]
 
         let pipe = Pipe()

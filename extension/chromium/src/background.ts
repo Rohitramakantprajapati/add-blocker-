@@ -29,13 +29,11 @@ chrome.runtime.onInstalled.addListener((details) => {
 });
 
 chrome.runtime.onMessage.addListener((message, sender, sendResponse) => {
-  // Validate sender origin (prevent injection attacks from malicious pages)
-  const allowedOrigins = [
-    chrome.runtime.getURL("").slice(0, -1), // extension origin
-  ];
-  
-  if (sender.url && !allowedOrigins.some((origin) => sender.url!.startsWith(origin))) {
-    console.warn("VoidBlock: rejected message from untrusted origin", sender.url);
+  const extensionOrigin = chrome.runtime.getURL("").slice(0, -1);
+  const senderUrl = sender.url;
+
+  if (senderUrl && !senderUrl.startsWith(extensionOrigin)) {
+    console.warn("VoidBlock: rejected message from untrusted origin", senderUrl);
     sendResponse({ error: "unauthorized origin" });
     return false;
   }
