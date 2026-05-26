@@ -1,116 +1,53 @@
-# Rust build artifacts
-/target/
-Cargo.lock
-**/*.rs.bk
-*.pdb
-
 # Python
+.venv/
+venv/
+env/
 __pycache__/
 *.py[cod]
-*$py.class
-*.so
-.Python
-build/
-develop-eggs/
-dist/
-downloads/
-eggs/
-.eggs/
-lib/
-lib64/
-parts/
-sdist/
-var/
-wheels/
 *.egg-info/
-.installed.cfg
-*.egg
-.pytest_cache/
-.coverage
-
-# Node / npm
-node_modules/
-npm-debug.log
-yarn-error.log
 dist/
-.env.local
+build/
+.eggs/
+*.so
 
-# eBPF
-platform/linux/ebpf/*.o
-platform/linux/ebpf/*.skel.h
-platform/linux/ebpf/.vmlinux.h
-
-# Android
-platform/android/.gradle/
-platform/android/build/
-platform/android/.idea/
-platform/android/*.iml
-platform/android/local.properties
-
-# Kotlin
-*.kt.bak
-
-# Swift / Xcode
-platform/macos/build/
-platform/macos/DerivedData/
-platform/macos/*.xcworkspace
-platform/macos/*.xcodeproj/xcuserdata/
-platform/macos/*.xcodeproj/project.xcworkspace/xcuserdata/
-
-# Windows
-platform/windows/build/
-platform/windows/*.exe
-platform/windows/*.dll
-platform/windows/CMakeFiles/
-platform/windows/cmake_install.cmake
-platform/windows/CMakeCache.txt
-
-# macOS
-.DS_Store
-.AppleDouble
-.LSOverride
-*.swp
-*.swo
-*~
-
-# Linux
-platform/linux/target/
-platform/linux/.vscode/
+# Node
+node_modules/
+dist/
+.next/
+.nuxt/
 
 # IDE
 .vscode/
 .idea/
 *.swp
 *.swo
-*~
-.editorconfig
 
-# Build outputs
-*.tar.gz
-*.tar.xz
-*.zip
-router/build/
-router/*.tar.gz
-
-# Database files
-blocklists/*.db
-blocklists/*.db-shm
-blocklists/*.db-wal
-
-# Extension artifacts
-extension/chromium/rules/rules.json.bak
-extension/firefox/rules/rules.json.bak
-
-# Tauri
-ui/desktop/src-tauri/target/
-ui/desktop/dist/
-
-# Misc
-*.log
+# OS
 .DS_Store
-*.swp
-*.swo
-*~
+Thumbs.db
+
+# Secrets
 .env
-.env.local
-.env.*.local
+*.env
+config/api_keys.json
+secrets.json
+
+# Build artifacts
+*.o
+*.d
+target/
+Cargo.lock   # only if this is a library crate; remove this line for binaries
+
+# Output files / plots
+*.png
+*.jpg
+*.jpeg
+*.pdf
+# Exception: add back any images that ARE part of the README or docs:
+# !docs/images/
+
+# Backup files
+*.bak
+*.backup
+*.orig
+dashboard.preview.bak
